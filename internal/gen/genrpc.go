@@ -106,6 +106,7 @@ func (jr *JzeroRpc) Gen() error {
 				// rename logic dir and server dir
 				dirName, _ := format.FileNamingFormat("gozero", s.Name)
 				fixDirName, _ := format.FileNamingFormat(jr.Style, s.Name)
+				fmt.Println("dirName-->", dirName, fixDirName)
 
 				_ = os.Rename(filepath.Join("internal", "logic", strings.ToLower(fixDirName)), filepath.Join("internal", "logic", dirName))
 				_ = os.Rename(filepath.Join("internal", "server", strings.ToLower(fixDirName)), filepath.Join("internal", "server", dirName))
@@ -340,6 +341,7 @@ func (jr *JzeroRpc) GetAllLogicFiles(protoSpec rpcparser.Proto) ([]LogicFile, er
 	for _, service := range protoSpec.Service {
 		for _, rpc := range service.RPC {
 			namingFormat, err := format.FileNamingFormat(jr.Style, rpc.Name+"Logic")
+			fmt.Println("namingFormat--->", namingFormat)
 			if err != nil {
 				return nil, err
 			}
